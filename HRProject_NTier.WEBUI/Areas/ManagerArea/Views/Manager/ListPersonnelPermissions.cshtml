@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+    IEnumerable<HRProject_NTier.CORE.Entities.Permission> personeller = ViewData[("PersonelPermissionsDetails")] as IEnumerable<HRProject_NTier.CORE.Entities.Permission>;
+}
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+}
+
+<h2 style="text-align:center;">Personel İzin Listesi</h2>
+
+
+<body>
+
+    <div class="container mb-3 mt-3">
+        <table id="dataTable" class="table table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>Pesonel Adı</th>
+                    <th>Personel Soyadı</th>
+                    <th>İzin Tipi</th>
+                    <th>İzin Açıklaması</th>
+                    <th>İzin Başlangıç Tarihi</th>
+                    <th>İzin Bitiş Tarihi</th>
+                    <th>Reddet</th>
+                    <th>KabulEt</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in personeller)
+                {
+                    <tr>
+
+                        @*<td><a asp-controller="" asp-action="" asp-route-id=""><img src="" width="270" height="170" alt="" /></a></td>
+                            <td></td>*@
+                        <td>@item.Personnel.Name</td>
+                        <td>@item.Personnel.Surname</td>
+                        <td>@item.Description</td>
+                        <td>@item.Name</td>
+                        <td>@item.StartedDate.ToShortDateString()</td>
+                        <td>@item.EndDate.ToShortDateString()</td>
+
+
+                        <td><a asp-action="DisApprovePermission" asp-controller="Manager" asp-route-id="@item.ID" class="btn btn-outline-danger">✖️</a></td>
+                        <td><a asp-action="ApprovedPermission" asp-controller="Manager" class="btn btn-outline-success">✔️</a></td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a  asp-action="ListPersonnel">Listeye Geri Dön</a>
+    </div>
+
+
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 3,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+
+}
+
+

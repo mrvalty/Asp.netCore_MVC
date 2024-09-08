@@ -1,0 +1,55 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.Entities.Spending>
+
+@{
+    ViewData["Title"] = "ListSpending";
+    Layout = "~/Areas/PersonnelArea/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+<h2>Harcama Listesi</h2>
+
+<p>
+    <a asp-action="AddSpendingAsPersonel">Harcama Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Harcama Tipi
+            </th>
+
+
+            <th>
+                Harcama Ücreti
+            </th>
+
+            <th>
+                Harcama Oluşturma tarihi
+            </th>
+        
+            <th>
+                Red Açıklaması
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.spendingType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

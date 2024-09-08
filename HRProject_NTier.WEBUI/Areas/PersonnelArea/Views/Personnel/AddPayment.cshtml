@@ -1,0 +1,59 @@
+﻿@model HRProject_NTier.CORE.Entities.Payment
+
+@{
+    ViewData["Title"] = "AddPayment";
+    Layout = "~/Areas/PersonnelArea/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+<h2>Avans Talep Formu</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddPayment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span>Açıklama</span>
+                <textarea cols="3" asp-for="Description" class="form-control">
+            </textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span>Ücret</span>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.Hidden("PersonnelID", (object)TempData["perID"])
+            </div>
+            <div class="form-group">
+                <span>Talep Edilen Tarih</span>
+                <input asp-for="RequestDate" class="form-control" />
+                <p>@ViewData["HataMesajıTarih"]</p>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-default" />
+                <p> @ViewData["MesajKaydet"] </p>
+            </div>
+            <a asp-action="ListPayment"> Geri Dön...</a>
+            <div class="form-group">          
+                <input type="hidden" asp-for="CreatedDate" class="form-control" />
+             
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label> <input type="hidden" asp-for="IsActived" value="false" /> </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label><input type="hidden" asp-for="IsDeleted" value="false" /></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label> <input type="hidden" asp-for="IsApproved" value="false" /> </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

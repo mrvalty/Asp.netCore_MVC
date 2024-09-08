@@ -1,0 +1,125 @@
+﻿@model HRProject_NTier.CORE.Entities.Personnel
+
+@{
+    ViewData["Title"] = "PersonnelDetail";
+    Layout = "~/Areas/PersonnelArea/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Personel Bilgileri</title>
+</head>
+<body>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProfileImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MailAddress)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telephone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HiredDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Salary)
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Model.Name
+                </td>
+                <td>
+                    @Model.Surname
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem=>item.Password)
+        </td>*@
+                <td>
+                    @Model.MailAddress
+                </td>
+                <td>
+                    @Model.Telephone
+                </td>
+                <td>
+                    @Model.BirthDate
+                </td>
+                <td>
+                    @Model.Gender
+                </td>
+                <td>
+                    @Model.City
+                </td>
+                <td>
+                    @Model.Password
+                </td>
+                <td>
+                    @Model.CompanyName
+                </td>
+                <td>
+                    @Model.Department
+                <td>
+                    @Model.Name
+                </td>
+                <td>
+                    @Model.HiredDate
+                </td>
+
+                <td>
+                    @Model.Salary
+                </td>
+
+
+                <td>
+                    <a asp-action="UpdatePersonnel" asp-route-id="@Model.ID">Düzenle</a> |
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+</html>

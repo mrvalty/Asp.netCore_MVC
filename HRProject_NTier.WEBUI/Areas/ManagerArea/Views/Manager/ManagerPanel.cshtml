@@ -1,0 +1,96 @@
+﻿@using HRProject_NTier.CORE.Entities
+
+@model Tuple<IEnumerable<ManagerComment>, IEnumerable<Manager>>
+
+
+@{
+    ViewData["Title"] = "ManagerPanel";
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="panel panel-profile">
+            <div class="">
+                <!-- LEFT COLUMN -->
+                <div class="profile-left">
+                    <!-- PROFILE HEADER -->
+
+                    <div class="profile-header">
+                        <div class="overlay"></div>
+
+                        <div class="profile-main">
+
+                            @foreach (var item in Model.Item2)
+                            {
+                                if (item.ID == ViewBag.managerID)
+                                {
+
+                                    if (item.ProfileImage == null)
+                                    {
+                                        <img src="https://via.placeholder.com/100x100" class="img-circle" width="100" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/@item.ProfileImage" class="img-circle" alt="Avatar" width="100" />
+                                    }
+
+                                    <h3 class="name">@item.Name  @item.Surname</h3>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <!-- END PROFILE HEADER -->
+                    <!-- PROFILE DETAIL -->
+                    <div class="profile-detail">
+                        <div class="profile-info">
+                            <h4 class="heading">Kişisel Bilgiler</h4>
+                            <ul class="list-unstyled list-justify">
+                                @foreach (var item in Model.Item2)
+                                {
+                                    if (item.ID == ViewBag.managerID)
+                                    {
+
+                                        <li>Ad        <span>@item.Name</span></li>
+                                        <li>Soyad     <span> @item.Surname</span></li>
+                                        <li>Email     <span>@item.MailAddress</span></li>
+                                        <li>Telefon   <span>@item.Telephone</span></li>
+
+                                    }
+
+                                }
+                            </ul>
+                        </div>
+                        <div class="profile-info">
+
+                        </div>
+
+                        @* Edit Profil *@
+
+                        <div class="text-center">
+                            <a class="btn btn-primary" asp-controller="Manager" asp-action="UpdateManager">Edit Profile</a>
+                        </div>
+                    </div>
+                    <!-- END PROFILE DETAIL -->
+                </div>
+                <!-- END LEFT COLUMN -->
+                <!-- RIGHT COLUMN -->
+             
+                <!-- END AWARDS -->
+                <!-- TABBED CONTENT -->
+                <div class="custom-tabs-line tabs-line-bottom left-aligned">
+
+                </div>
+              
+                <!-- END TABBED CONTENT -->
+            </div>
+            <!-- END RIGHT COLUMN -->
+        </div>
+    </div>
+</div>
+

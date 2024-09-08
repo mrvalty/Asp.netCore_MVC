@@ -1,0 +1,40 @@
+﻿@model HRProject_NTier.CORE.Entities.VisitorComments
+
+@{
+    ViewData["Title"] = "DeleteVisitorMessage";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>DeleteVisitorMessage</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>VisitorComments</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NameSurname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameSurname)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteVisitorMessage">
+        <input type="hidden" asp-for="CommentsID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

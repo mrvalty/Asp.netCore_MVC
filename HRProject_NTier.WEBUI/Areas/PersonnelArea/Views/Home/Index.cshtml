@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/PersonnelArea/Views/Shared/_PersonnelLayout.cshtml";
+}
+
+    <div class="row">
+        
+       <!-- MAIN -->
+  
+        <div class="col-lg-10">
+            <div class="row" style="margin-top:100px !important; margin-left:60px;">
+                <div class="container-fluid p-0">
+                    <!-- About-->
+       
+                        <meta charset='utf-8' />
+                        <link href="~/fullcalendar/lib/main.css" rel="stylesheet" />
+
+                        <script src="~/fullcalendar/lib/main.js"></script>
+
+                        <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+                        <script src="~/fullcalendar/lib/locales-all.js"></script>
+
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+                        <script src="~/js/bootbox.min.js"></script>
+                        <script>
+
+                            document.addEventListener('DOMContentLoaded', function () {
+                                var calendarEl = document.getElementById('calendar');
+
+                                var calendar = new FullCalendar.Calendar(calendarEl, {
+                                    headerToolbar: {
+                                        left: 'prev,next today',
+                                        center: 'title',
+                                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                                    },
+                                    initialDate: '2021-06-08',
+                                    locale: "tr",
+                                    themeSystem: "bootstrap",
+                                    navLinks: true,
+                                    selectable: true,
+                                    selectMirror: true,
+                                    editable: true,
+                                    dayMaxEvents: true, // allow "more" link when too many events
+                                    events: "GetCalendarEvents"
+                                });
+
+                                calendar.render();
+                            });
+
+                        </script>
+                        <style>
+
+                            body {
+                                margin: 40px 10px;
+                                padding: 0;
+                                font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+                                font-size: 14px;
+                            }
+
+                            #calendar {
+                                max-width: 700px;
+                                margin: 0 auto;
+                            }
+                        </style>
+        
+                        <div id='calendar'></div>
+                        <div id="fullCalModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">close</span></button>
+                                        <h4 id="modalTitle" class="modal-title"></h4>
+                                    </div>
+                                    <div id="modalBody" class="modal-body"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>             
+                </div>
+            </div>
+         </div>
+    </div>
+
+

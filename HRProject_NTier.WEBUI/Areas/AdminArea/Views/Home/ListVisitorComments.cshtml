@@ -1,0 +1,44 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.Entities.VisitorComments>
+
+@{
+    ViewData["Title"] = "ListVisitorComments";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Ziyaretçi Mesajları</h4>
+
+<table class="table" style="border:hidden; margin-top:50px;">
+    <thead>
+        <tr>
+            <th>
+              Ad Soyad
+            </th>
+            <th>
+               Mesaj
+            </th>
+            <th>
+               Mail Adres
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameSurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="DeleteVisitorMessage" asp-route-id="@item.CommentsID">Sil</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

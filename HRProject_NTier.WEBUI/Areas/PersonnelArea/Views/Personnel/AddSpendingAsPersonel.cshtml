@@ -1,0 +1,37 @@
+﻿@model Spending
+@{
+    IEnumerable<Spending> HarcamaTipleri = ViewData[("SpendingTypes")] as IEnumerable<Spending>;
+}
+
+<div class="container mb-3 mt-3">
+
+    <h2 class="text-left" style="margin-bottom: 50px; margin-top:100px;"><b><strong>Harcama Ekle</strong></b></h2>
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <form asp-controller="Personnel" asp-action="AddSpendingAsPersonel" asp-area="PersonnelArea" method="post" enctype="multipart/form-data">
+
+            <label>Harcama Adı:</label><br>
+                <input type="text" style="width:825px;height: 40px" asp-for="Name"></>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <br><br>
+
+            <label>Tutar:</label><br>
+            <input type="text" style="width:825px;height: 40px" asp-for="Amount"></>
+            <span asp-validation-for="Amount" class="text-danger"></span>
+            <br><br>
+            <label for=""> Tipi: </label><br>
+            <select style="width:825px" asp-for="spendingType" class="form-control" asp-items="@Html.GetEnumSelectList<SpendingType>()"></select>
+            <br><br>
+
+            <button type="submit" value="Save">Gönder</button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+
+    datePickerId.max = new Date().toISOString().split("T")[0];
+
+
+</script>

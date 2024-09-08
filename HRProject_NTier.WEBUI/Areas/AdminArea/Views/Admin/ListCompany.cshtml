@@ -1,0 +1,94 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.ViewModels.ListCompanyAdminVM>
+@{
+    ViewData["Title"] = "ListCompany";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .btnKaydet {
+        margin-top: 45px;
+        margin-left: -257px;
+    }
+</style>
+
+<h3>Kayıtlı Şirketler Listesi</h3>
+<div class="btnKaydet">
+    <a class="btn btn-success " asp-controller="Company" asp-action="AddCompany">Ekle</a>
+</div>
+
+<table class="table">
+    <thead style="background-color:#2B333E; color:#AEB7C2">
+        <tr>
+
+            <th>
+                Şirket Adı
+            </th>
+            <th>Yönetici Adı </th>
+            <th>Yönetici Soyadı</th>
+            <th>
+                Yönetici Mail Adresi
+            </th>
+
+            <th>
+                Şirket Aktif Mi?
+            </th>
+            <th>
+                Şirket Pasif Mi?
+            </th>
+            <th>
+                Paket Adı
+            </th>
+            <th>
+                Personel Sayısı
+            </th>
+            <th>
+                Paket Başlangıç Tarihi
+            </th>
+            <th>
+                Paket Bitiş Tarihi
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActived)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PackageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PersonnelNumber)
+                </td>
+                <td>
+                    @item.StartedDate.ToShortDateString()
+                </td>
+
+                <td>
+                    @item.EndDate.ToShortDateString()
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

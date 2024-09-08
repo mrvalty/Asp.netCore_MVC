@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "ListApprovePermissions";
+    IEnumerable<Permission> approved = ViewData[("PersonelPermissionsApprovals")] as IEnumerable<Permission>;
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+}
+
+
+<body>
+
+    <h6 style="font-size: 25px; margin-top: 15px;text-align:center">Onaylanan İzinler </h6>
+
+    <div class="container mb-3 mt-3">
+        <div class="scrollmenu">
+            <a class="btn btn-default" asp-controller="Manager" asp-action="ListActivePermissions"><strong>Onay Bekleyenler</strong><label>|| @ViewBag.BekleyenSayisi</label></a>
+            <a class="btn btn-success" asp-controller="Manager" asp-action="ListApprovePermissions" asp-route-id=""><strong>Onaylananlar</strong><label>|| @ViewBag.OnaylananSayisi</label></a>
+            <a class="btn btn-danger" asp-controller="Manager" asp-action="ListDissaprovedPermissions"><strong>Reddedilenler</strong><label>|| @ViewBag.ReddedilenSayisi</label></a>
+        </div>
+        <table id="dataTable" class="table table-striped" width="100%">
+            <thead>
+                <tr>
+                    @*<th>Profil Resmi</th>*@
+                    <th>Personel Adı</th>
+                    <th>Personel Soyadı</th>
+                    <th>İzin Tipi</th>
+                    @*<th>İzin Açıklaması</th>*@
+                    <th>İzin Başlangıç Tarihi</th>
+                    <th>İzin Bitiş Tarihi</th>
+                    <th>Durum</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in approved)
+                {
+                    <tr>
+
+                        @*<td><a asp-controller="" asp-action="" asp-route-id=""><img src="" width="50" height="50" alt="" /></a></td>*@
+
+                        <td>@item.Personnel.Name</td>
+                        <td>@item.Personnel.Surname</td>
+                        @*<td>@item.Name</td>*@
+                        <td>@Html.DisplayFor(modelItem => item.permissionType)</td>
+                        @*<td>@item.Description</td>*@
+                        <td>@item.StartedDate.ToShortDateString()</td>
+                        <td>@item.EndDate.ToShortDateString()</td>
+
+                        <td><p style="color:green">Onaylandı</p></td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+ 
+    </div>
+
+</body>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 3,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+
+}
+
+
+

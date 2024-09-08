@@ -1,0 +1,126 @@
+﻿@model HRProject_NTier.CORE.Entities.Personnel
+
+@{
+    ViewData["Title"] = "PersonalInfo";
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+
+
+<form asp-action="PersonalInfo" style="margin-left:70px;" method="post" enctype="multipart/form-data">
+    <h3>Kişisel Bilgiler</h3>
+    <h4><label>@Model.Name  @Model.Surname</label></h4>
+    <input type="hidden" value="@Model.ID" />
+    <hr />
+
+
+    <img src="@Model.ProfileImage" width="200" height="200" style="margin-bottom:30px;" />
+    <hr />
+    <div class="row">
+
+
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label style="margin-left:10px;">@Html.CheckBox("Gender", false)</label> <label>Kadın</label><br />
+                    <label style="margin-left:10px;">@Html.CheckBox("Gender", true)</label> <label>Erkek</label><br />
+                </div>
+            </div>
+            <div class=" col-md-4">
+                <div class="form-group">
+                    <label>Diploma</label>
+                    <input asp-for="FileNamePath" type="file" class="form-control" accept=".pdf,.docx">
+                    <span asp-validation-for="FileNamePath" class="text-danger"></span>
+                </div>
+                <div class="row">
+
+                    <div><a>@Model.FileName</a></div>
+
+               
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="HiredDate" class="control-label"></label>
+                    <input asp-for="HiredDate" class="form-control" />
+                    <span asp-validation-for="HiredDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="FiredDate" class="control-label"></label>
+                    <input asp-for="FiredDate" class="form-control" />
+                    <span asp-validation-for="FiredDate" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Salary" class="control-label"></label>
+                    <input asp-for="Salary" class="form-control" />
+                    <span asp-validation-for="Salary" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="IsActived" /> @Html.DisplayNameFor(model => model.IsActived)
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-8">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="submit" value="Kaydet" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="ListPersonnel">Geri Dön</a>
+    </div>
+</form>
+
+
+

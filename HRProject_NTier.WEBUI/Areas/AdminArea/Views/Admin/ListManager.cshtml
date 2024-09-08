@@ -1,0 +1,113 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.Entities.Manager>
+
+@{
+    ViewData["Title"] = "ListManager";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .btnKaydet{
+        margin-top:55px;
+        margin-left:-138px;
+    }
+    .butonBoyut {
+        width: 85px;
+        height: 35px;
+    }
+    .butonBoyut1 {
+        width: 85px;
+        height: 35px;
+        margin-top: -63px;
+        margin-left: 100px;
+    }
+</style>
+<h2>Yöneticiler</h2>
+
+<p>
+    <a class="btn btn-success btnKaydet" asp-controller="Admin" asp-action="AddManager">Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #ID
+            </th>
+            <th>
+                Adı
+            </th>
+            <th>
+                Soyadı
+            </th>
+            <th>
+                Mail Adresi
+            </th>
+
+
+            <th>
+                Telefonu
+            </th>
+
+            <th>
+                Adresi
+            </th>
+
+            <th>
+                Şehir
+            </th>
+            <th>
+                Şirket Adı
+            </th>
+            <th>
+                Departmanı
+            </th>
+   
+            <th colspan="2">Üyelik Durumu</th>
+            <th colspan="3">İşlemler</th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+              @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+
+            <td>
+                <a class="btn btn-success butonBoyut" asp-action="DeleteManager1" asp-controller="Admin" asp-route-id="@item.ID">Aktif Et</a>
+                <a class="btn btn-danger butonBoyut1" asp-action="DeleteManager" asp-controller="Admin" asp-route-id="@item.ID">Pasif Et</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

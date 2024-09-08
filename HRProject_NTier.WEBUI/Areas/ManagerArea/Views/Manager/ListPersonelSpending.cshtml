@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+    ViewData["Title"] = "ListPersonelSpending";
+    IEnumerable<Spending> OnayBekleyenHarcamalarım = ViewData[("PersonelSpendingDetails")] as IEnumerable<Spending>;
+}
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+}
+
+    <title>Aktif Harcama Talepleri Listesi</title>
+<body>
+    <h6 style="font-size: 25px; margin-top: 15px;text-align:center">Onay Bekleyen Harcama Talepleri</h6>
+    <div class="container mb-3 mt-3">
+        <table id="dataTable" class="table table-striped" width="100%">
+            <thead>
+                <tr>
+                    <th>Pesonel Adı</th>
+                    <th>Personel Soyadı</th>
+                    <th>Oluşturulma Tarihi</th>
+                    <th>Harcama Ücreti</th>
+                    <th>Harcama Tipi</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in OnayBekleyenHarcamalarım)
+                {
+                    <tr>
+
+                        <td>@item.Personnel.Name</td>
+                        <td>@item.Personnel.Surname</td>
+                        <td>@item.CreatedDate.ToShortDateString()</td>
+                        <td>@item.Amount</td>
+                        <td>@Html.DisplayFor(modelItem => item.spendingType)</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="ListPersonnel">Listeye Geri Dön</a>
+    </div>
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 3,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+
+}
+

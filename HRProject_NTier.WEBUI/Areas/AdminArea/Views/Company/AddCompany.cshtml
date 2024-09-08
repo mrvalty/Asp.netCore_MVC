@@ -1,0 +1,85 @@
+﻿@model HRProject_NTier.CORE.Entities.Company
+
+@{
+    ViewData["Title"] = "AddCompany";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Şirket Ekleme Paneli</h2>
+<hr />
+<div class="container">
+    <div class="col-md-12">
+        <form asp-action="AddCompany" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-danger">@ViewBag.nullException</p>
+                    <p class="text-danger">@ViewBag.mailRemark</p>
+                    <p class="text-danger">@ViewBag.mailRemark1</p>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mail Adresi</label>
+                            <input type="email" name="mail" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Paket İsmi</label>
+                            <input type="text" name="packageName" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-controller="Admin" asp-action="ListCompany" >Kayıtlı Şirketler Listesine Geri Dön'</a>
+</div>
+
+
+
+
+
+
+
+
+
+

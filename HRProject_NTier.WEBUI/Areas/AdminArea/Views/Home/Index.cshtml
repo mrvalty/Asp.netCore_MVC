@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    IEnumerable<Company> threeMont = ViewData[("packageTimethreeMont")] as IEnumerable<Company>;
+    IEnumerable<Company> sixMont = ViewData[("packageTimesixMont")] as IEnumerable<Company>;
+    IEnumerable<Company> oneYear = ViewData[("packageTimeoneYear")] as IEnumerable<Company>;
+
+}
+<style>
+    .favoridiskutu {
+        width: 300px;
+        height: 260px;
+        margin-left: 15px;
+        background: transparent;
+        box-shadow: 3px 3px 3px 3px #E0E0E0;
+        object-fit: contain;
+        margin-top: 25px;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body favoridiskutu">
+                        <h5 class="card-title " style="font-weight:bold; text-align:center; font-size:13px;color: cornflowerblue;">3 Aylık Paket Üyeliği Sona Yaklaşan </h5>
+
+                        @foreach (var item in threeMont)
+                        {
+                            @if (item.Package.PackageTime == (PackageTime)0)
+                            {
+                                <p class="card-text" style="font-size:12px;text-align: justify; line-height:29px; margin-left:10px;">
+                                    <b>Şirket Adı:</b>  @item.Name <br />
+                                    <b>Paket Adı :</b> :@item.Package.Name
+                                </p>
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 60rem; margin-left:90px;">
+                    <div class="card-body favoridiskutu">
+                        <h5 class="card-title " style="font-weight:bold; text-align:center; font-size:13px;color: cornflowerblue;">6 Aylık Paket Üyeliği Sona Yaklaşan</h5>
+                        @foreach (var item in sixMont)
+                        {
+                            @if (item.Package.PackageTime == (PackageTime)1)
+                            {
+                                <p class="card-text" style="font-size:12px;text-align: justify; line-height:29px; margin-left:10px;">
+                                    <b>Şirket Adı:</b>  @item.Name <br />
+                                    <b>Paket Adı :</b> :@item.Package.Name
+                                </p>
+                                }
+                            }
+
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 20rem; margin-left:180px;">
+                    <div class="card-body favoridiskutu">
+                        <h5 class="card-title " style="font-weight:bold; text-align:center; font-size:13px;color: cornflowerblue;">1 Yıllık Paket Üyeliği Sona Yaklaşan</h5>
+                        @foreach (var item in oneYear)
+                        {
+                            @if (item.Package.PackageTime == (PackageTime)2)
+                            {
+                                <p class="card-text" style="font-size:12px;text-align: justify; line-height:29px; margin-left:10px;">
+                                    <b>Şirket Adı:</b>  @item.Name <br />
+                                    <b>Paket Adı :</b> :@item.Package.Name
+                                </p>
+                                }
+                            }
+
+                        </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.ViewModels.PaymentManagerPersonelVM>
+@{
+    ViewData["Title"] = "onayBekleyen";
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+}
+
+
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+}
+
+
+
+<head>
+    <style>
+        .dot {
+            height: 28px;
+            width: 28px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 15px;
+            color: black;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<h2>Onay Bekleyen Avanslar</h2>
+
+<div>
+    <p>
+        <a asp-controller="Manager" asp-action="ListPayment" class="btn btn-default">
+            @ViewData["onaylananList"]  ||  Avans Listesi
+        </a>
+        <a asp-controller="Manager" asp-action="onayBekleyen" class="btn btn-info ">
+
+            @ViewData["onaylananBekleyen"]   || Onay Bekleyen  Avanslar
+        </a>
+
+        <a asp-controller="Manager" asp-action="OnaylananAvans" class="btn btn-success">     @ViewData["onaylanan"]   || Onaylanan Avanslar</a>
+        <a asp-controller="Manager" asp-action="ReddedilenAvans" class="btn btn-danger">     @ViewData["reddedilen"]  || Reddedilen Avanslar</a>
+    </p>
+
+</div>
+
+<table id="dataTable" class="table table-striped" width="100%">
+    <thead>
+        <tr>
+            <th>
+                #PayID
+            </th>
+            <th>
+                <span>
+                    Personel Adı Soyadı
+                </span>
+            </th>
+            <th>
+                <span>
+                    Açıklama
+                </span>
+            </th>
+            <th>
+                <span>
+                    Ücret
+                </span>
+            </th>
+            <th>
+                <span>
+                    Tarih
+                </span>
+            </th>
+            <th>
+                <span>
+                    Talep Tarih
+                </span>
+            </th>
+
+            <th>
+                <span>
+                    Onay Bekleyen
+                    <span class="dot">
+                        @Model.Count()
+                    </span>
+                </span>
+            </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+
+        <tr>
+            <td>
+                @item.ID
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonelName) @Html.DisplayFor(ModelItem => item.PersonelSurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>@item.RequestDate.ToShortDateString()</td>
+            <td>
+
+                @if (item.IsActived == false && item.IsApproved == false)
+                {
+                    <span class="btn btn-info">
+                        Onay Bekliyor
+                    </span>
+
+                }
+            </td>
+           
+
+            <td>
+                <a class="btn btn-success" asp-controller="Manager" asp-action="UpdatePayment" asp-route-id="@item.ID">Kabul Et</a> |
+                <a class="btn btn-danger" asp-controller="Manager" asp-action="DeletePayment" asp-route-id="@item.ID">Reddet</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 3,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+
+}
+

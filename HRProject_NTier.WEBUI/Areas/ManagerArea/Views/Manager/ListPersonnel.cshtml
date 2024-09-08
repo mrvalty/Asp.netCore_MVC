@@ -1,0 +1,94 @@
+﻿@*@model IEnumerable<InsertPersonnelVM>*@
+
+@{
+    ViewData["Title"] = "ListPersonnel";
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+}
+
+@{ 
+    IEnumerable<Personnel> personeller = ViewData["personeller"] as IEnumerable<Personnel>;
+}
+
+<style>
+
+
+    .imgPhoto {
+        height: 100px;
+    }
+</style>
+
+<form style="margin-left:30px">
+
+
+    <h4> Personel Listesi</h4>
+    <p>
+        <a class="btn btn-info" asp-action="AddPersonnel"> Personel Ekle</a>
+    </p>
+    <table class="table" style="border:hidden">
+        <thead>
+            <tr>
+                <th>Profil Resmi </th>
+                <th>
+                   Personel Adı
+                </th>
+                <th>
+                   Personel Soyadı
+                </th>
+                <th>
+                   Personel Mail Adresi
+                </th>
+                <th>
+                   Personel Departmanı
+                </th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in personeller)
+            {
+
+               
+                    <tr>
+                      
+                        <td>
+                            @if (item.ProfileImage == null)
+                            {
+                                <img src="https://via.placeholder.com/100x100" class="img-circle" width="100" />
+                            }
+                            else {<img src="~/images/@item.ProfileImage" class="imgPhoto" /> }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MailAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department)
+                        </td>
+                        <td>
+                            <a asp-action="PersonnelDetails" asp-route-id="@item.ID"> Düzenle</a> |
+                            <a asp-action="PersonnelDetail" asp-route-id="@item.ID"> Detay</a> |
+                      
+                            <a asp-action="ListPersonnelPermissions" asp-route-id="@item.ID"> İzin Detay</a> |
+                            <a asp-action="ListPersonelSpending" asp-route-id="@item.ID"> Harcama Detayı</a> |
+                            @*<a  asp-action="AddPermission" asp-controller="Personnel" asp-route-id=""> İzin Talebinde Bulun</a> |*@
+
+                        </td>
+                    </tr>
+                
+
+
+
+            }
+        </tbody>
+    </table>
+</form>
+
+
+
+

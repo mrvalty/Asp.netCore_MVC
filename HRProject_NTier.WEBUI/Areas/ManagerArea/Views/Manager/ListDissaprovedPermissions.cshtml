@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Areas/ManagerArea/Views/Shared/_ManagerLayout.cshtml";
+}
+
+@model IEnumerable<HRProject_NTier.CORE.ViewModels.ListPermissionsVM>
+
+@{
+
+    IEnumerable<Permission> DisapprovedOnes = ViewData[("PersonelPermissionsDisapprovals")] as IEnumerable<Permission>;
+}
+
+
+@section styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
+}
+
+
+
+
+<body>
+
+    <h6 style="font-size: 25px; margin-top: 15px;text-align:center">Reddedilen İzinler </h6>
+    <div class="container mb-3 mt-3">
+        <div class="scrollmenu">
+            <a class="btn btn-default" asp-controller="Manager" asp-action="ListActivePermissions"><strong>Onay Bekleyenler</strong><label>|| @ViewBag.BekleyenSayisi</label></a>
+            <a class="btn btn-success" asp-controller="Manager" asp-action="ListApprovePermissions" asp-route-id=""><strong>Onaylananlar</strong><label>|| @ViewBag.OnaylananSayisi</label></a>
+            <a class="btn btn-danger" asp-controller="Manager" asp-action="ListDissaprovedPermissions"><strong>Reddedilenler</strong><label>|| @ViewBag.ReddedilenSayisi</label></a>
+
+        </div>
+        <table id="dataTable" class="table table-striped" width="100%">
+            <thead>
+                <tr>
+
+                    <th>Personel Adı</th>
+                    <th>Personel Soyadı</th>
+                    <th>İzin Tipi</th>
+                    <th>İzin Başlangıç Tarihi</th>
+                    <th>İzin Bitiş Tarihi</th>
+                    <th>Durum</th>
+                    <th>Red Mesajı</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in DisapprovedOnes)
+                {
+
+                    <div class="modal fade" id="sendDisapprovalMessage">
+
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="sendDissaprovalMessageLabel">Red Mesajı Gönder</h4>
+
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="SendDisMessage">
+                                        <div class="form-group">
+                                            <label><strong>Red Mesajı</strong></label>
+                                            <input name="description" type="text" minlength="10" class="form-control" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Kapat</button>
+                                            <button asp-action="SendDisMessage" asp-controller="Manager" asp-route-id="@item.ID" type="submit" class="btn btn-outline-danger" data-save="modal">Gönder</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <tr>
+
+                        <td>@item.Personnel.Name</td>
+                        <td>@item.Personnel.Surname</td>
+                        <td>@Html.DisplayFor(modelItem => item.permissionType)</td>
+                        <td>@item.StartedDate.ToShortDateString()</td>
+                        <td>@item.EndDate.ToShortDateString()</td>
+                        <td><p style="color:red">Reddedildi</p></td>
+                        <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#sendDisapprovalMessage">Gönder</button></td>
+                      
+                        @*@if (item.Description != null)
+                            {
+                                <td><button type="button" disabled class="btn btn-outline-danger" data-toggle="modal" data-target="#sendDisapprovalMessage">Gönder</button></td>
+                            }
+                            else
+                            {
+                                <td><button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#sendDisapprovalMessage">Gönder</button></td>
+                            }*@
+
+                        <td><p style="color:red">Reddedildi</p></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $("#dataTable").dataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+                },
+                "searching": true,
+                "ordering": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "pageLength": 10,
+                "responsive": true,
+                "columnDefs": [{
+                    "targets": 3,
+                    "orderable": false
+                }]
+            });
+        });
+    </script>
+
+}

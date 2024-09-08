@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.ViewModels.ManagerCommentVM>
+
+@{
+    ViewData["Title"] = "onaylananYorum";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .butonlar {
+        margin-top: 55px;
+        margin-left: -286px;
+    }
+</style>
+<h2>Reddedilen Yorumlar</h2>
+
+<div class="butonlar">
+    <p>
+        <a asp-controller="Admin" asp-action="ListManagerComment" class="btn btn-default">
+            @ViewData["TumYorum"]  ||  Yorum Listesi
+        </a>
+        <a asp-controller="Admin" asp-action="onayBekleyenYorum" class="btn btn-info">     @ViewData["onayBekleyenYorum"]  || Onay Bekleyen  Yorumlar</a>
+        <a asp-controller="Admin" asp-action="onaylananYorum" class="btn btn-success">     @ViewData["onaylanan"]  || Onaylanan Yorumlar</a>
+        <a asp-controller="Admin" asp-action="reddedilenYorum" class="btn btn-danger">     @ViewData["reddedilenYorum"]  || Reddedilen Yorumlar</a>
+
+    </p>
+</div>
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Adı </th>
+            <th>Soyadı </th>
+            <th>Yorum </th>
+            <th colspan="3">İşlem </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.Raw(item.Comment)
+                </td>
+
+                <td>
+                    @if (item.IsApproved==false && item.IsActived==false)
+                    {
+                        <span class="btn btn-danger">
+                            Reddedilen
+                        </span>
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

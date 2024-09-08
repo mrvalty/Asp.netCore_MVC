@@ -1,0 +1,85 @@
+﻿@model IEnumerable<HRProject_NTier.CORE.Entities.Package>
+
+@{
+    ViewData["Title"] = "ListPackage";
+    Layout = "~/Areas/AdminArea/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Paketler</h2>
+<p>
+    <a style="margin-left: -111px; margin-top: 44px;" class="btn btn-success" asp-action="AddPackage" asp-controller="Admin">Paket Ekle</a>
+</p>
+
+<table class="table">
+   
+    <thead style="background-color:#2B333E; color:#AEB7C2">
+        <tr>
+            <th>
+                Paket Adı
+            </th>
+            <th>
+                Personel Sayısı
+            </th>
+            <th>     
+            </th>
+            <th>
+            </th>
+            <th>
+                Paket Süresi
+            </th>
+            <th>
+                Paket Fiyatı
+            </th>
+          
+            <th>
+                Aktif Mi?  
+            </th>
+            <th>
+                Silinmiş Mi?
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonnelNumber)
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.StartedDate)
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PackageTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price ) TL
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.CreatedDate)
+
+            </td>
+            <td>
+                @Html.HiddenFor(modelItem => item.ModifiedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+
+            <td>
+              
+                <a class="btn btn-danger" asp-action="DeletePackage" asp-controller="Admin" asp-route-id="@item.ID">Delete</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
